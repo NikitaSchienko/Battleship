@@ -4,17 +4,19 @@
 <web-app>
 
     <servlet>
-        <servlet-name>hello</servlet-name>
-        <servlet-class>HelloWorld</servlet-class>
+        <servlet-name>ServletActionPage</servlet-name>
+        <servlet-class>main.ServletActionPage</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>hello</servlet-name>
-        <url-pattern>/hello</url-pattern>
+        <servlet-name>ServletActionPage</servlet-name>
+        <url-pattern>/setting</url-pattern>
     </servlet-mapping>
 
 
+
+
     <welcome-file-list>
-        <welcome-file>/jsp/index.jsp</welcome-file>
+        <welcome-file>/jsp/setting.jsp</welcome-file>
     </welcome-file-list>
 </web-app>

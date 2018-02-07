@@ -1,0 +1,37 @@
+table
+{
+    border: 2px solid black;
+}
+
+td
+{
+    width: 50px;
+    height: 50px;
+    border: 2px solid black;
+}
+button
+{
+    width: 50px;
+    height: 50px;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+}
+.button-blue
+{
+    background-color: #008CBA;
+}
+
+.button-red
+{
+    background-color: red;
+
+}
+
+.button-blue:hover
+{
+    background-color: #090CBA;
+}

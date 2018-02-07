@@ -11,6 +11,11 @@
     <title>Title</title>
 </head>
 <body>
-sdfergyhju
+    <h1>Морской бой</h1>
+    <div class="menu-conteiner">
+        <button class="button">Играть</button>
+        <button>Справка</button>
+        <button>Выйти</button>
+    </div>
 </body>
 </html>
