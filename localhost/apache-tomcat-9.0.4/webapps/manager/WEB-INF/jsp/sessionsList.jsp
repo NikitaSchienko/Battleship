@@ -148,7 +148,7 @@
 
 <form method="get" action="<%=request.getContextPath()%>/html">
   <p style="text-align: center;">
-    <input type="submit" value="Return to main page" />
+    <input type="submit" value="Return to servlets page" />
   </p>
 </form>
 

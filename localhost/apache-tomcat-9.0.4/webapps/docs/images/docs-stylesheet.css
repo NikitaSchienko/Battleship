@@ -56,7 +56,7 @@ th {
 }
 
 main {
-  /* Remove this once all IEs support <main> element */
+  /* Remove this once all IEs support <servlets> element */
   display: block;
 }
 

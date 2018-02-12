@@ -191,7 +191,7 @@
   <div class="subsection"><h4 id="Defining_a_context">Defining a context</h4><div class="text">
   <p><b>It is NOT recommended to place &lt;Context&gt; elements directly in the
   server.xml file.</b> This is because it makes modifying the
-  <strong>Context</strong> configuration more invasive since the main
+  <strong>Context</strong> configuration more invasive since the servlets
   <code>conf/server.xml</code> file cannot be reloaded without restarting
   Tomcat.</p>
 
@@ -209,7 +209,7 @@
   (the file name less the .xml extension). This file will always take precedence
   over any context.xml file packaged in the web application's META-INF
   directory.</li>
-  <li>Inside a <a href="host.html">Host</a> element in the main
+  <li>Inside a <a href="host.html">Host</a> element in the servlets
   <code>conf/server.xml</code>.</li>
   </ul>
 

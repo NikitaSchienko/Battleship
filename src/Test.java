@@ -1,21 +1,20 @@
-import panel.ShipGeneration;
+import server.ShipClassicsGenerate;
+import server.ShipGeneration;
 
 public class Test
 {
     public static void main(String[] args)
     {
-        ShipGeneration shipGeneration = new ShipGeneration(80);
+        ShipClassicsGenerate s = new ShipClassicsGenerate();
 
-        int[][] ships = shipGeneration.getShips();
-
-        for (int i = 0; i < 10; i++)
+        for(int i = 0; i < s.getShipsField().length; i++)
         {
-            for(int j =0; j < 10; j++)
+            for(int j = 0; j < s.getShipsField()[i].length; j++)
             {
-                System.out.print(ships[i][j] +" ");
+                System.out.print(s.getShipsField()[i][j]+" ");
             }
             System.out.println();
         }
-
+        System.out.println("Count: "+ s.getShips().size());
     }
 }

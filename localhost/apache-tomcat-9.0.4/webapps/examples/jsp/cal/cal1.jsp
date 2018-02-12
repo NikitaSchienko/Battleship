@@ -41,7 +41,7 @@
 </TR>
 </TABLE>
 
-<!-- the main table -->
+<!-- the servlets table -->
 <TABLE WIDTH=60% BGCOLOR=lightblue BORDER=1 CELLPADDING=10>
 <TR>
 <TH> Time </TH>

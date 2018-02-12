@@ -1,4 +1,4 @@
-package panel;
+package server;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -31,8 +31,16 @@ public class ShipGeneration
         return ships;
     }
 
-    private void generate()
+    public void generate()
     {
+        try
+        {
+            throw new NullPointerException();
+        }
+        catch (Exception e)
+        {
+            e.getStackTrace();
+        }
         Random random = new Random();
 
         for(int i = 0; i < count; i++)

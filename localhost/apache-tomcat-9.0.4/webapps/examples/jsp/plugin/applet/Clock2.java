@@ -38,7 +38,7 @@ public class Clock2 extends Applet implements Runnable {
     String lastdate;             // String to hold date displayed
     Font clockFaceFont;          // Font for number display on clock
     Date currentDate;            // Used to get date to display
-    Color handColor;             // Color of main hands and dial
+    Color handColor;             // Color of servlets hands and dial
     Color numberColor;           // Color of second hand and numbers
 
     @Override
@@ -105,7 +105,7 @@ public class Clock2 extends Applet implements Runnable {
         }
     }
 
-    // Paint is the main part of the program
+    // Paint is the servlets part of the program
     @Override
     public void paint(Graphics g) {
         int xh, yh, xm, ym, xs, ys, s = 0, m = 10, h = 10, xcenter, ycenter;

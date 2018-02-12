@@ -5,7 +5,7 @@
 
     <servlet>
         <servlet-name>ServletActionPage</servlet-name>
-        <servlet-class>main.ServletActionPage</servlet-class>
+        <servlet-class>servlets.ServletActionPage</servlet-class>
     </servlet>
 
     <servlet-mapping>
