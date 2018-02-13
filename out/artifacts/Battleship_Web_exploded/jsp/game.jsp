@@ -15,10 +15,12 @@
 </head>
 <body>
 <h1>Морской бой</h1>
-<%!ShipGeneration shipGeneration = new ShipGeneration(20);%>
+<%!ShipGeneration shipGeneration = new ShipGeneration(20,10);%>
     <%= getField(shipGeneration) %>
 <p />
-Ваше имя : <input type="text" id="userName" /><br />
+Ваше имя :
+<input type="button" name="action" onclick="actionClick(this)" id="1" value="Кнопка 1"/><br />
+<input type="button" name="action" onclick="actionClick(this)" id="2" value="Кнопка 2"/><br />
 <span style="font-style:italic; font-size:75%">
                 сервлет ответит после потери полем курсора</span>
 <p />

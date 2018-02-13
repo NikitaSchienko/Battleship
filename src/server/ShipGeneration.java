@@ -9,10 +9,10 @@ public class ShipGeneration
     private int[][] ships;
     private ArrayList<Integer> positions;
 
-    public ShipGeneration(int count)
+    public ShipGeneration(int count, int size)
     {
         this.count = count;
-        ships = new int[10][10];
+        ships = new int[size][size];
         positions = new ArrayList<Integer>();
         fillingInArrayList();
         generate();

@@ -17,7 +17,8 @@ public class ServletActionPage extends HttpServlet
             throws ServletException, IOException
     {
 
-        String content = "Привет, ";
+        String test = request.getParameter("userName").trim();
+        String content = "Привет,"+test;
         response.setContentType("text/plain");
 
         OutputStream outStream = response.getOutputStream();
