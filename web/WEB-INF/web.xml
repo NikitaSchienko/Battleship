@@ -10,13 +10,11 @@
 
     <servlet-mapping>
         <servlet-name>ServletActionPage</servlet-name>
-        <url-pattern>/setting</url-pattern>
+        <url-pattern>/game</url-pattern>
     </servlet-mapping>
 
 
-
-
     <welcome-file-list>
-        <welcome-file>/jsp/setting.jsp</welcome-file>
+        <welcome-file>/jsp/game.jsp</welcome-file>
     </welcome-file-list>
 </web-app>

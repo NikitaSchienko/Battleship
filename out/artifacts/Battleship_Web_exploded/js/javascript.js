@@ -1,12 +1,16 @@
-function cleanCell(td)
-{
-    alert(td.value);
-    if(td.value == '0')
-    {
-        td.innerHTML = '0';
-    }
-    else
-    {
-        td.innerHTML = '1';
-    }
-}
+// вызов функции по завершению загрузки страницы
+$(document).ready(function() {
+    // вызов функции после потери полем 'userName' фокуса
+    $('#userName').blur(function() {
+        $.ajax({
+            url : 'game',     // URL - сервлет
+            data : {                 // передаваемые сервлету данные
+                userName : $('#userName').val()
+            },
+            success : function(response) {
+                // обработка ответа от сервера
+                $('#ajaxUserServletResponse').text(response);
+            }
+        });
+    });
+});
