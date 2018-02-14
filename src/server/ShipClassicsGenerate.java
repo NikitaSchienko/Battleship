@@ -30,21 +30,86 @@ public class ShipClassicsGenerate
         }
 
         generate4();
-       // generate3();
+        generate3();
+        generate2();
+        //generate1();
     }
+
+    private void generate2()
+    {
+        Random random = new Random();
+        for(int i = 0; i < 3; i ++)
+        {
+
+            int orentation = random.nextInt(2);
+
+            ArrayList<Point> variantPoint = searchTruePositionShips(2,orentation);
+            System.out.println("Доступные точки - "+(orentation != VERTICAL? "HORIZONTAL" : "VERTICAL"));
+            printTruePoint(variantPoint);
+
+            if(variantPoint.size()==0)
+            {
+                variantPoint = searchTruePositionShips(2, orentation == VERTICAL? HORIZONTAL : VERTICAL);
+                System.out.println("Доступные точки - "+(orentation != VERTICAL? "HORIZONTAL" : "VERTICAL"));
+                printTruePoint(variantPoint);
+            }
+
+
+            int numberPoint = random.nextInt(variantPoint.size());
+
+            Point point = ships.get(numberPoint);
+            System.out.println("Выбранная точка"+point+" "+(orentation != VERTICAL? "HORIZONTAL" : "VERTICAL"));
+            recordShips(3,orentation, point.getX(), point.getY());
+            //ships.remove(numberPoint);
+
+            System.out.println("Тест: ");
+            print();
+            System.out.println();
+        }
+    }
+
 
     private void generate3()
     {
         Random random = new Random();
         for(int i = 0; i < 2; i ++)
         {
-            int numberPoint = random.nextInt(ships.size());
-            int orentation = random.nextInt(2);
-            Point point = ships.get(numberPoint);
 
+            int orentation = random.nextInt(2);
+
+            ArrayList<Point> variantPoint = searchTruePositionShips(3,orentation);
+            System.out.println("Доступные точки - "+(orentation != VERTICAL? "HORIZONTAL" : "VERTICAL"));
+            printTruePoint(variantPoint);
+
+            if(variantPoint.size()==0)
+            {
+                variantPoint = searchTruePositionShips(3, orentation == VERTICAL? HORIZONTAL : VERTICAL);
+                System.out.println("Доступные точки - "+(orentation != VERTICAL? "HORIZONTAL" : "VERTICAL"));
+                printTruePoint(variantPoint);
+            }
+
+
+            int numberPoint = random.nextInt(variantPoint.size());
+
+            Point point = ships.get(numberPoint);
+            System.out.println("Выбранная точка"+point+" "+(orentation != VERTICAL? "HORIZONTAL" : "VERTICAL"));
             recordShips(3,orentation, point.getX(), point.getY());
-            ships.remove(numberPoint);
+            //ships.remove(numberPoint);
+
+            System.out.println("Тест: ");
+            print();
+            System.out.println();
         }
+    }
+
+    private void printTruePoint(ArrayList<Point> points)
+    {
+
+        for (Point point: points)
+        {
+            System.out.println(point);
+        }
+        System.out.println();
     }
 
     private void generate4()
@@ -52,7 +117,7 @@ public class ShipClassicsGenerate
         Random random = new Random();
 
         int orentation = random.nextInt(2);
-        if(orentation == VERTICAL)
+        if(orentation != VERTICAL)
         {
             recordShips(4, orentation, random.nextInt(10), random.nextInt(7));
         }
@@ -67,7 +132,7 @@ public class ShipClassicsGenerate
     {
         for(int i = 0; i < lengthShips; i++)
         {
-            if(orentation == VERTICAL)
+            if(orentation != VERTICAL)
             {
                 shipsField[x][y+i] = 2;
                 recordBorderShips(x,y+i);
@@ -89,7 +154,11 @@ public class ShipClassicsGenerate
         {
             for(int j = -1; j < 2; j++)
             {
-                if((y+j) >= 0 && (x+i) >= 0 && (x+i) < shipsField.length && (y+j) < shipsField.length && shipsField[x+i][y+j] != 2)
+                if((y+j) >= 0
+                        && (x+i) >= 0
+                        && (x+i) < shipsField.length
+                        && (y+j) < shipsField.length
+                        && shipsField[x+i][y+j] != 2)
                 {
                     shipsField[x+i][y+j] = 1;
                     ships.remove(new Point(x+i,y+j));
@@ -101,5 +170,76 @@ public class ShipClassicsGenerate
     public int[][] getShipsField()
     {
         return shipsField;
+    }
+
+
+    private ArrayList<Point> searchTruePositionShips(int lengthShip, int orentation)
+    {
+        ArrayList<Point> truePositionShips = new ArrayList<Point>();
+
+        for (Point currentPoint: ships)
+        {
+               if(checkOnPositionShip(currentPoint, lengthShip, orentation))
+               {
+                   truePositionShips.add(currentPoint);
+               }
+        }
+        return truePositionShips;
+    }
+
+
+    private boolean checkOnPositionShip(Point point, int lengthShip, int orentation)
+    {
+
+        int x = point.getX();
+        int y = point.getY();
+
+            switch (orentation)
+            {
+                case HORIZONTAL:
+                {
+                    for(int i = 0; i < lengthShip; i++)
+                    {
+                        if((y+i) >= shipsField.length)
+                        {
+                            return false;
+                        }
+                        else if(shipsField[x][y+i] > 0)
+                        {
+                            return false;
+                        }
+                    }
+                }
+                break;
+                case VERTICAL:
+                {
+                    for(int i = 0; i < lengthShip; i++)
+                    {
+                        if((x+i) >= shipsField.length)
+                        {
+
+                            return false;
+                        }
+                        else if(shipsField[x+i][y] > 0)
+                        {
+                            return false;
+                        }
+                    }
+                }
+                break;
+            }
+            return true;
+    }
+
+    private void print()
+    {
+        for(int i = 0; i < shipsField.length; i++)
+        {
+            for(int j = 0; j < shipsField[i].length; j++)
+            {
+                System.out.print(shipsField[i][j]+" ");
+            }
+            System.out.println();
+        }
     }
 }

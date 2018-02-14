@@ -1,6 +1,7 @@
 package servlets;
 
 import server.GameLogic;
+import server.ShipClassicsGenerate;
 import server.ShipGeneration;
 
 import javax.servlet.ServletException;
@@ -82,5 +83,7 @@ public class ServletActionPage extends HttpServlet
         table = table + "</table>\n";
         return table;
     }
+
+
 
 }
