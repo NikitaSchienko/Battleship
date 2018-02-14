@@ -1,16 +1,34 @@
 // вызов функции по завершению загрузки страницы
-function actionClick(component)
+function actionClick()
 {
         $.ajax({
             url : 'game',     // URL - сервлет
+            type : 'get',
             data :
                 {                 // передаваемые сервлету данные
-                    userName : component.id
+                    userName : "fdbg"
                 },
             success : function(response)
             {
                 // обработка ответа от сервера
-                $('#ajaxUserServletResponse').text(response);
+                $('#tableContainer').html(response);
             }
         });
+}
+
+function actionClick1(td)
+{
+    $.ajax({
+        url : 'game',     // URL - сервлет
+        type : 'post',
+        data :
+            {                 // передаваемые сервлету данные
+                idCell : td.id
+            },
+        success : function(response)
+        {
+            // обработка ответа от сервера
+            $('#tableContainer').html(response);
+        }
+    });
 }

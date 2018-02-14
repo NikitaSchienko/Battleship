@@ -19,7 +19,8 @@
     <div class="jumbotron">
         <h1>Морской бой</h1>
         <p>
-            <a href="/setting.jsp" class="btn btn-primary btn-lg" role="button">Играть</a>
+            <a href="/jsp/setting.jsp" class="btn btn-primary btn-lg" role="button">Играть</a>
+            <a href="/jsp/help.jsp" class="btn btn-primary btn-lg" role="button">Справка</a>
         </p>
     </div>
 </div>

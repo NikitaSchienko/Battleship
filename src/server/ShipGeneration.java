@@ -55,6 +55,6 @@ public class ShipGeneration
     {
         int x = positions.get(position)/ships.length;
         int y = positions.get(position)%ships.length;
-        ships[x][y] = 1;
+        ships[x][y] = 2;
     }
 }

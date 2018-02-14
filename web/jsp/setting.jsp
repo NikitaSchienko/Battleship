@@ -23,7 +23,7 @@
         <div class="form-group">
             <label for="example-number-input" class="col col-form-label">Введите размер игравого поля</label>
             <div class="col">
-                <input class="form-control" type="number" value="10" id="example-number-input" max="100" min="0">
+                <input type="text" class="form-control bfh-number" value="10" id="example-number-input" max="100" min="0">
             </div>
         </div>
         <div class="form-group">
@@ -33,6 +33,7 @@
             </div>
         </div>
         <div class="text-center">
+            <a href="/jsp/game.jsp" class="btn btn-primary btn-lg" role="button">Играть</a>
             <button type="submit" class="btn btn-primary col-3">Играть</button>
         </div>
     </div>

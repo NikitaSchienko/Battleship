@@ -15,15 +15,10 @@
 </head>
 <body>
 <h1>Морской бой</h1>
-<%!ShipGeneration shipGeneration = new ShipGeneration(20,10);%>
-    <%= getField(shipGeneration) %>
-<p />
-Ваше имя :
-<input type="button" name="action" onclick="actionClick(this)" id="1" value="Кнопка 1"/><br />
-<input type="button" name="action" onclick="actionClick(this)" id="2" value="Кнопка 2"/><br />
-<span style="font-style:italic; font-size:75%">
-                сервлет ответит после потери полем курсора</span>
-<p />
+<div id="tableContainer"></div>
+<input type="button" name="action" onclick="actionClick()" id="1" value="Кнопка 1"/>
+<input type="button" name="action" onclick="actionClick()" id="2" value="Кнопка 2"/>
+    <input type="submit">
 <strong>Ответ сервлета </strong>:
 <span id="ajaxUserServletResponse"></span>
 </body>
@@ -40,13 +35,23 @@
             table = table + "<tr>\n";
             for (int j = 0; j < 10; j++)
             {
-                if(ships[i][j]==0)
+                switch (ships[i][j])
                 {
-                    table = table + "<td onClick=\"cleanCell(this)\"><input type=\"submit\" name=\"action\" value=\"0\"></td>\n";
-                }
-                else
-                {
-                    table = table + "<td onClick=\"cleanCell(this)\"><input type=\"submit\" name=\"action\" value=\"1\"></td>\n";
+                    case 0:
+                    {
+                        table = table + "<td class=\"td-color-blue\" onClick=\"cleanCell(this)\"></td>\n";
+                    }
+                    break;
+                    case 1:
+                    {
+                        table = table + "<td class=\"td-color-gray\" onClick=\"cleanCell(this)\"><input type=\"submit\" name=\"action\" value=\"0\"></td>\n";
+                    }
+                    break;
+                    case 2:
+                    {
+                        table = table + "<td class=\"td-color-red\" onClick=\"cleanCell(this)\"><input type=\"submit\" name=\"action\" value=\"0\"></td>\n";
+                    }
+                    break;
                 }
 
             }
