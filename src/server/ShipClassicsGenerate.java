@@ -5,19 +5,30 @@ import java.util.Random;
 
 public class ShipClassicsGenerate
 {
+
+    private static final int VERTICAL = 0;
+    private static final int HORIZONTAL = 1;
+
     private int[][] shipsField;
     private ArrayList<Point> ships;
+    private Random random;
 
-    public ArrayList<Point> getShips()
+    private ArrayList<Ship> shipArrayList;
+
+    public int[][] getShips()
     {
-        return ships;
+        return shipsField;
     }
 
-    private static final int VERTICAL = 1;
-    private static final int HORIZONTAL = 2;
+
+    public ArrayList<Ship> getShipArrayList() {
+        return shipArrayList;
+    }
 
     public ShipClassicsGenerate()
     {
+        shipArrayList = new ArrayList<Ship>();
+        random = new Random();
         shipsField = new int[10][10];
         ships = new ArrayList<Point>();
 
@@ -29,78 +40,66 @@ public class ShipClassicsGenerate
             }
         }
 
-        generate4();
-        generate3();
-        generate2();
-        //generate1();
+        for (int i = 1; i < 5; i++)
+        {
+            generateShipForLenrth(5-i,i);
+        }
+
+        for (int x = 0; x < 10; x++)
+        {
+            for (int y = 0; y < 10; y++)
+            {
+                if(shipsField[x][y] == 1)
+                {
+                    shipsField[x][y] = 0;
+                }
+            }
+        }
     }
 
-    private void generate2()
+    private void generateShipForLenrth(int lengthShip, int countShip)
     {
-        Random random = new Random();
-        for(int i = 0; i < 3; i ++)
+        for(int i = 0; i < countShip; i++)
         {
 
             int orentation = random.nextInt(2);
 
-            ArrayList<Point> variantPoint = searchTruePositionShips(2,orentation);
-            System.out.println("Доступные точки - "+(orentation != VERTICAL? "HORIZONTAL" : "VERTICAL"));
-            printTruePoint(variantPoint);
+            ArrayList<Point> variantPoint = searchTruePositionShips(lengthShip,orentation);
 
-            if(variantPoint.size()==0)
+
+            if(variantPoint.size() == 0)
             {
-                variantPoint = searchTruePositionShips(2, orentation == VERTICAL? HORIZONTAL : VERTICAL);
-                System.out.println("Доступные точки - "+(orentation != VERTICAL? "HORIZONTAL" : "VERTICAL"));
-                printTruePoint(variantPoint);
+                try
+                {
+                    throw new NullPointerException();
+                }
+                catch (NullPointerException e)
+                {
+                    e.getStackTrace();
+                    return;
+                }
             }
-
 
             int numberPoint = random.nextInt(variantPoint.size());
 
-            Point point = ships.get(numberPoint);
-            System.out.println("Выбранная точка"+point+" "+(orentation != VERTICAL? "HORIZONTAL" : "VERTICAL"));
-            recordShips(3,orentation, point.getX(), point.getY());
-            //ships.remove(numberPoint);
-
-            System.out.println("Тест: ");
-            print();
-            System.out.println();
+            Point point = variantPoint.get(numberPoint);
+            try
+            {
+                recordShips(lengthShip, orentation, point.getX(), point.getY());
+                Ship ship = new Ship(point, orentation,lengthShip);
+                shipArrayList.add(ship);
+            }
+            catch (ArrayIndexOutOfBoundsException e)
+            {
+                e.getStackTrace();
+            }
         }
     }
 
 
-    private void generate3()
-    {
-        Random random = new Random();
-        for(int i = 0; i < 2; i ++)
-        {
-
-            int orentation = random.nextInt(2);
-
-            ArrayList<Point> variantPoint = searchTruePositionShips(3,orentation);
-            System.out.println("Доступные точки - "+(orentation != VERTICAL? "HORIZONTAL" : "VERTICAL"));
-            printTruePoint(variantPoint);
-
-            if(variantPoint.size()==0)
-            {
-                variantPoint = searchTruePositionShips(3, orentation == VERTICAL? HORIZONTAL : VERTICAL);
-                System.out.println("Доступные точки - "+(orentation != VERTICAL? "HORIZONTAL" : "VERTICAL"));
-                printTruePoint(variantPoint);
-            }
 
 
-            int numberPoint = random.nextInt(variantPoint.size());
 
-            Point point = ships.get(numberPoint);
-            System.out.println("Выбранная точка"+point+" "+(orentation != VERTICAL? "HORIZONTAL" : "VERTICAL"));
-            recordShips(3,orentation, point.getX(), point.getY());
-            //ships.remove(numberPoint);
-
-            System.out.println("Тест: ");
-            print();
-            System.out.println();
-        }
-    }
 
     private void printTruePoint(ArrayList<Point> points)
     {
@@ -112,27 +111,13 @@ public class ShipClassicsGenerate
         System.out.println();
     }
 
-    private void generate4()
-    {
-        Random random = new Random();
 
-        int orentation = random.nextInt(2);
-        if(orentation != VERTICAL)
-        {
-            recordShips(4, orentation, random.nextInt(10), random.nextInt(7));
-        }
-        else
-        {
-            recordShips(4, orentation, random.nextInt(7), random.nextInt(10));
-        }
-
-    }
 
     private void recordShips(int lengthShips, int orentation, int x, int y)
     {
         for(int i = 0; i < lengthShips; i++)
         {
-            if(orentation != VERTICAL)
+            if(orentation == HORIZONTAL)
             {
                 shipsField[x][y+i] = 2;
                 recordBorderShips(x,y+i);
@@ -145,7 +130,6 @@ public class ShipClassicsGenerate
                 ships.remove(new Point(x,y));
             }
         }
-
     }
 
     private void recordBorderShips(int x, int y)

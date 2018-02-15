@@ -4,10 +4,6 @@ function actionClick()
         $.ajax({
             url : 'game',     // URL - сервлет
             type : 'get',
-            data :
-                {                 // передаваемые сервлету данные
-                    userName : "fdbg"
-                },
             success : function(response)
             {
                 // обработка ответа от сервера
@@ -32,3 +28,14 @@ function actionClick1(td)
         }
     });
 }
+
+$(function() {
+    if(document.getElementById("fixed")!=null)
+    {
+        $('#myModal').on('shown.bs.modal', function () {
+            $('#myInput').focus()
+        })
+    }
+});
+
+

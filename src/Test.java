@@ -15,6 +15,6 @@ public class Test
             }
             System.out.println();
         }
-        System.out.println("Count: "+ s.getShips().size());
+        //System.out.println("Count: "+ s.getShips().size());
     }
 }
