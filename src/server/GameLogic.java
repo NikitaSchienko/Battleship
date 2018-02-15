@@ -42,16 +42,28 @@ public class GameLogic
 
     public void shot(int id)
     {
-        if(shipsField.getShips()[getRow(id)][getColumn(id)] == 0)
+        switch (shipsField.getShips()[getRow(id)][getColumn(id)])
         {
-            field[getRow(id)][getColumn(id)] = 1;
-        }
-        if(shipsField.getShips()[getRow(id)][getColumn(id)] == 2)
-        {
-            field[getRow(id)][getColumn(id)] = 2;
-            System.out.println("Корабль подбит: "+id);
-            System.out.println(toStringField());
-            searchDeadShip(getRow(id), getColumn(id));
+            case 0:
+            {
+                field[getRow(id)][getColumn(id)] = 1;
+                System.out.println("Пусто "+id);
+            }
+            break;
+            case 2:
+            {
+                field[getRow(id)][getColumn(id)] = 2;
+                System.out.println("Корабль подбит: "+id);
+                System.out.println(toStringField());
+                Ship ship = searchDeadShip(getRow(id), getColumn(id));
+                shipArrayList.remove(ship);
+            }
+            break;
+            default:
+            {
+                System.out.println("Неизвестный код");
+            }
+            break;
         }
 
     }
@@ -78,7 +90,7 @@ public class GameLogic
         return id / shipsField.getShips().length;
     }
 
-    private void searchDeadShip(int x, int y)
+    private Ship searchDeadShip(int x, int y)
     {
         for (Ship ship : shipArrayList)
         {
@@ -88,10 +100,12 @@ public class GameLogic
                 {
                     System.out.println("Корабль убит - "+ship.getPoint());
                     recordBorderShips(ship);
-                    shipArrayList.remove(ship);
+                    return ship;
                 }
             }
         }
+
+        return null;
     }
 
     private boolean checkDeadAllBlockShip(Ship ship)
@@ -152,7 +166,7 @@ public class GameLogic
                         && (x+i) >= 0
                         && (x+i) < field.length
                         && (y+j) < field.length
-                        && field[x+i][y+j] != 2)
+                        && field[x+i][y+j] == 0)
                 {
                     field[x+i][y+j] = 1;
                     //ships.remove(new Point(x+i,y+j));

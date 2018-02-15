@@ -15,12 +15,15 @@ public class ServletActionPage extends HttpServlet
 {
     private ShipClassicsGenerate shipGeneration;
     private int[][] field;
+    private GameLogic gameLogic;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+
         shipGeneration = new ShipClassicsGenerate();
         field = new int[10][10];
+        gameLogic = new GameLogic(shipGeneration,field,shipGeneration.getShipArrayList());
         //String test = request.getParameter("ships");
         String content = getField(field);
         response.setContentType("text/plain");
@@ -35,9 +38,9 @@ public class ServletActionPage extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        GameLogic gameLogic = new GameLogic(shipGeneration,field,shipGeneration.getShipArrayList());
 
         int idCell = Integer.valueOf(request.getParameter("idCell"));
+
         gameLogic.shot(idCell);
 
         response.setContentType("text/plain");
@@ -46,10 +49,17 @@ public class ServletActionPage extends HttpServlet
 
         if(gameLogic.getShipArrayList().size()==0)
         {
-            String congratulation = "Победа!";
+            outStream.write(modalWindow().getBytes("UTF-8"));
+        }
+        if(gameLogic.getShipArrayList().size() == 0)
+        {
             outStream.write(modalWindow().getBytes("UTF-8"));
         }
 
+        System.out.println("Поле перед отправкой: ");
+        print();
+        System.out.println("HTML");
+        System.out.println(getField(field));
         outStream.write(getField(field).getBytes("UTF-8"));
 
         outStream.flush();
@@ -59,25 +69,15 @@ public class ServletActionPage extends HttpServlet
 
     private String modalWindow()
     {
-        String modal = "<div id=\"fixed\" class=\"modal fade\">\n" +
-                "  <div class=\"modal-dialog\" role=\"document\">\n" +
-                "    <div class=\"modal-content\">\n" +
-                "      <div class=\"modal-header\">\n" +
-                "        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n" +
-                "          <span aria-hidden=\"true\">&times;</span>\n" +
-                "        </button>\n" +
-                "        <h4 class=\"modal-title\">Modal title</h4>\n" +
-                "      </div>\n" +
-                "      <div class=\"modal-body\">\n" +
-                "        <p>One fine body&hellip;</p>\n" +
-                "      </div>\n" +
-                "      <div class=\"modal-footer\">\n" +
-                "        <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n" +
-                "        <button type=\"button\" class=\"btn btn-primary\">Save changes</button>\n" +
-                "      </div>\n" +
-                "    </div><!-- /.модальное окно-Содержание -->  \n" +
-                "  </div><!-- /.модальное окно-диалог -->  \n" +
-                "</div><!-- /.модальное окно -->  ";
+        String modal = "<div id=\"overlay\">\n" +
+                "    <div id=\"modal\">\n" +
+                "        <div class=\"modal-body\">\n" +
+                "            <p>Поздравляем!</p>\n" +
+                "            <p>Ваш счет: </p>\n" +
+                "            <div class=\"close\" onclick=\"showModalWindow('none'); return false\">x</div>\n" +
+                "        </div>\n" +
+                "    </div>\n" +
+                "</div>";
         return modal;
     }
 
@@ -117,6 +117,16 @@ public class ServletActionPage extends HttpServlet
         return table;
     }
 
-
+    private void print()
+    {
+        for(int i = 0; i < field.length; i++)
+        {
+            for(int j = 0; j < field[i].length; j++)
+            {
+                System.out.print(field[i][j]+" ");
+            }
+            System.out.println();
+        }
+    }
 
 }

@@ -29,13 +29,12 @@ function actionClick1(td)
     });
 }
 
-$(function() {
-    if(document.getElementById("fixed")!=null)
-    {
-        $('#myModal').on('shown.bs.modal', function () {
-            $('#myInput').focus()
-        })
-    }
-});
+
+
+function showModalWindow()
+{
+    document.getElementById('overlay').style.display = 'none';
+}
+
 
 
